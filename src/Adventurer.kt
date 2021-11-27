@@ -48,4 +48,10 @@ class Adventurer(data: List<String>) {
                 "  - Number of treasure(s): $treasures"
     }
 
+    fun getDisplayedName(): String {
+        return "A(${
+            if (name.length <= 5) name
+            else name.take(4) + "…"
+        })"
+    }
 }

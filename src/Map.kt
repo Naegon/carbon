@@ -1,3 +1,5 @@
+import java.lang.Math.ceil
+
 class Map (data: String) {
     private val width: Int
     private var height: Int
@@ -42,8 +44,15 @@ class Map (data: String) {
     override fun toString(): String {
         return buildString {
             map.forEach { line ->
-                line.forEach { this.append("$it\t" + if(it.length == 4) "" else "\t") }
+                line.forEach {
+                    this.append(it)
+                    this.append("\t".repeat(kotlin.math.ceil((8 - it.length) / 4.0).toInt()))
+                }
                 this.append("\n")
+            }
+            this.append("\n")
+            adventurers.forEach {
+                this.append(it.toString())
             }
         }
     }

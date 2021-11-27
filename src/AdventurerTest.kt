@@ -20,4 +20,28 @@ internal class AdventurerTest {
         assertEquals(expectedAdventurer, adventurer.toString())
     }
 
+    @Test
+    fun testGetDisplayedNameWithLongValue() {
+        // Given
+        val name = "Very_long_name"
+
+        // When
+        val adventurer = Adventurer(listOf("A", name, "1", "1", "S", "AADADA"))
+
+        // Then
+        assertEquals("A(Very…)", adventurer.getDisplayedName())
+    }
+
+    @Test
+    fun testGetDisplayedNameWithShortValue() {
+        // Given
+        val name = "Bob"
+
+        // When
+        val adventurer = Adventurer(listOf("A", name, "1", "1", "S", "AADADA"))
+
+        // Then
+        assertEquals("A(Bob)", adventurer.getDisplayedName())
+    }
+
 }

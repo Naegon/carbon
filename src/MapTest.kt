@@ -17,9 +17,14 @@ internal class MapTest {
 
         // Then
         val expectedMap = ".\t\t.\t\t.\t\t\n" +
-                ".\t\tM\t\t.\t\t\n" +
+                ".\t\tA(Indi…).\t\t\n" +
                 ".\t\t.\t\tM\t\t\n" +
-                "T(2)\tT(1)\t.\t\t\n"
+                "T(2)\tT(1)\t.\t\t\n\n" +
+                "Indiana:\n" +
+                "  - Current position: (1; 1)\n" +
+                "  - Orientation: Sud\n" +
+                "  - Movements: [Avancer, Avancer, TournerDroite, Avancer, TournerDroite, Avancer]\n" +
+                "  - Number of treasure(s): 0"
 
         assertEquals(expectedMap, resultMap.toString())
     }
