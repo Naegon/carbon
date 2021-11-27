@@ -1,4 +1,3 @@
-
 class Map (data: String) {
     private val width: Int
     private var height: Int
