@@ -10,6 +10,8 @@ class Map (data: String) {
 
         // if (mapData.size != 1)  // TODO: Throw error
 
+        // {C as "carte"} - {width} - {height}
+        // if (processedMapData.size != 3)  // TODO: Throw error
         width = processedMapData[1].toInt()
         height = processedMapData[2].toInt()
         map = Array(height) { Array(width) { "." } }
@@ -19,10 +21,12 @@ class Map (data: String) {
             when (item[0]) {
                 "C", "#" -> { } // Ignore commented line as well as already processed C line
                 "M" -> {
-                    map[item[2].toInt()][item[1].toInt()] = item[0]
+                    // {M as "Montagne"} - {position in X} - {position in Y}
+                    map[item[2].toInt()][item[1].toInt()] = "M"
                 }
                 "T" -> {
-                    map[item[2].toInt()][item[1].toInt()] = item[0] + "(2)" // TODO: Number of treasure
+                    // {T as "Trésor"} - {position in X} - {position in Y} - {number of treasure}
+                    map[item[2].toInt()][item[1].toInt()] = "T(${item[3]})"
                 }
                 "A" -> {
                     map[item[2].toInt()][item[1].toInt()] = item[0]

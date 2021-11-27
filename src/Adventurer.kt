@@ -7,6 +7,7 @@ class Adventurer(data: List<String>) {
     private val treasures: Int = 0
 
     init {
+        // {A as "Aventurier"} - {Adventurer name} - {position in X} - {position in Y} - {Orientation} - {Movements}
         // if (data.size != 6)  // TODO: Throw error
 
         name = data[1]
