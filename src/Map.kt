@@ -2,6 +2,7 @@ class Map (data: String) {
     private val width: Int
     private var height: Int
     private var map: Array<Array<String>>
+    private val adventurers: ArrayList<Adventurer> = ArrayList()
 
     init {
         val instructions = data.split("\n")
@@ -29,7 +30,9 @@ class Map (data: String) {
                     map[item[2].toInt()][item[1].toInt()] = "T(${item[3]})"
                 }
                 "A" -> {
-                    map[item[2].toInt()][item[1].toInt()] = item[0]
+                    val adventurer = Adventurer(item)
+                    adventurers.add(adventurer)
+                    map[adventurer.posY][adventurer.posX] = adventurer.getDisplayedName()
                 }
                 else -> println("Unsupported identifier") // TODO: Unsupported identifier
             }
