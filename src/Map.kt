@@ -1,4 +1,3 @@
-import java.lang.Math.ceil
 
 class Map (data: String) {
     private val width: Int
