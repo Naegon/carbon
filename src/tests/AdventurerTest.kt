@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class AdventurerTest {
     @Test
-    fun testMapWithValidFile() {
+    fun testAdventurerWithValidData() {
         // Given
         val data = listOf("A", "Indiana", "1", "1", "S", "AADADA")
 
@@ -21,6 +21,48 @@ internal class AdventurerTest {
                 "  - Number of treasure(s): 0"
 
         assertEquals(expectedAdventurer, adventurer.toString())
+    }
+
+    @Test
+    fun testMoveForward() {
+        // Given
+        val adventurer = Adventurer(listOf("A", "Indiana", "1", "1", "S", "AA"))
+
+        // When
+        adventurer.forward()
+
+        // Then
+        val expectedAdventurer = Adventurer(listOf("A", "Indiana", "1", "2", "S", "A"))
+
+        assertTrue(expectedAdventurer == adventurer)
+    }
+
+    @Test
+    fun testTurnLeft() {
+        // Given
+        val adventurer = Adventurer(listOf("A", "Indiana", "1", "1", "S", "GA"))
+
+        // When
+        adventurer.left()
+
+        // Then
+        val expectedAdventurer = Adventurer(listOf("A", "Indiana", "1", "1", "E", "A"))
+
+        assertTrue(expectedAdventurer == adventurer)
+    }
+
+    @Test
+    fun testTurnRight() {
+        // Given
+        val adventurer = Adventurer(listOf("A", "Indiana", "1", "1", "S", "GA"))
+
+        // When
+        adventurer.right()
+
+        // Then
+        val expectedAdventurer = Adventurer(listOf("A", "Indiana", "1", "1", "O", "A"))
+
+        assertTrue(expectedAdventurer == adventurer)
     }
 
     @Test
