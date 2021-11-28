@@ -1,3 +1,5 @@
+import Utils.TEXTCOLOR
+
 class Map (data: String) {
     private val width: Int
     private var height: Int
@@ -32,7 +34,6 @@ class Map (data: String) {
                 "A" -> {
                     val adventurer = Adventurer(item)
                     adventurers.add(adventurer)
-                    map[adventurer.posY][adventurer.posX] = adventurer.getDisplayedName()
                 }
                 else -> println("Unsupported identifier") // TODO: Unsupported identifier
             }
@@ -41,10 +42,10 @@ class Map (data: String) {
 
     override fun toString(): String {
         return buildString {
-            map.forEach { line ->
-                line.forEach {
-                    this.append(it)
-                    this.append("\t".repeat(kotlin.math.ceil((8 - it.length) / 4.0).toInt()))
+            for (i in 0 until height) {
+                for (j in 0 until width) {
+                    val adventurer = adventurers.firstOrNull { adventurer -> adventurer.posX == j && adventurer.posY == i }
+                    this.append((adventurer?.getDisplayedName() ?: map[i][j]).addTab().color())
                 }
                 this.append("\n")
             }
