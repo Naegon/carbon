@@ -1,8 +1,8 @@
 class Map (data: String) {
     private val width: Int
     private var height: Int
-    private var map: Array<Array<String>>
-    private val adventurers: ArrayList<Adventurer> = ArrayList()
+    var map: Array<Array<String>>
+    val adventurers: ArrayList<Adventurer> = ArrayList()
 
     init {
         val instructions = data.split("\n")

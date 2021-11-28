@@ -1,8 +1,10 @@
+import Adventurer.Orientation.*
+
 class Adventurer(data: List<String>) {
     private val name: String
-    val posX: Int
-    val posY: Int
-    private val orientation: Orientation?
+    var posX: Int
+    var posY: Int
+    private var orientation: Orientation?
     private val movement: ArrayList<Movement?> = ArrayList()
     private val treasures: Int = 0
 
@@ -15,10 +17,10 @@ class Adventurer(data: List<String>) {
         posY = data[3].toInt()
 
         orientation = when(data[4]) {
-            "N" -> Orientation.Nord
-            "S" -> Orientation.Sud
-            "O" -> Orientation.Ouest
-            "E" -> Orientation.Est
+            "N" -> Nord
+            "S" -> Sud
+            "O" -> Ouest
+            "E" -> Est
             else -> null // TODO: Error - Unsuported identifier
         }
 
@@ -54,4 +56,50 @@ class Adventurer(data: List<String>) {
             else name.take(4) + "…"
         })"
     }
+
+    fun getNextMove(): Movement? {
+        return movement[0]
+    }
+
+    override fun equals(other: Any?): Boolean =
+        (other is Adventurer)
+            && posX == other.posX
+            && posY == other.posY
+            && orientation == other.orientation
+            && movement == other.movement
+            && treasures == other.treasures
+
+    fun forward() {
+        when(orientation) {
+            Est -> posX += 1
+            Ouest -> posX -= 1
+            Nord -> posY -= 1
+            Sud -> posY += 1
+            null -> { } // TODO: Error
+        }
+        movement.removeFirst()
+    }
+
+    fun left() {
+        orientation = when(orientation) {
+            Est -> Nord
+            Nord -> Ouest
+            Ouest -> Sud
+            Sud -> Est
+            null -> null // TODO: Error
+        }
+        movement.removeFirst()
+    }
+
+    fun right() {
+        orientation = when(orientation) {
+            Est -> Sud
+            Nord -> Est
+            Ouest -> Nord
+            Sud -> Ouest
+            null -> null // TODO: Error
+        }
+        movement.removeFirst()
+    }
+
 }
