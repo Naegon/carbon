@@ -10,6 +10,4 @@ fun String.color(): String {
     }.value + this + RESET.value
 }
 
-fun String.addTab(): String {
-    return this + "\t".repeat(kotlin.math.ceil((8 - this.length) / 4.0).toInt())
-}
+fun String.addTab(): String = this + "\t".repeat(kotlin.math.ceil((8 - this.length) / 4.0).toInt())

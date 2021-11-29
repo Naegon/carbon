@@ -1,5 +1,3 @@
-import Utils.TEXTCOLOR
-
 class Map (data: String) {
     private val width: Int
     private var height: Int
@@ -51,7 +49,7 @@ class Map (data: String) {
             }
             this.append("\n")
             adventurers.forEach {
-                this.append(it.toString())
+                this.append(it.toString() + "\n\n")
             }
         }
     }
