@@ -26,10 +26,10 @@ class Adventurer(data: List<String>) {
         }
 
         data[5].forEach {
-            movement.add(when(it.toString()) {
-                "A" -> Avancer
-                "G" -> TournerGauche
-                "D" -> TournerDroite
+            movement.add(when(it) {
+                'A' -> Avancer
+                'G' -> TournerGauche
+                'D' -> TournerDroite
                 else -> null // TODO: Error - Unsuported identifier
             })
         }
@@ -104,7 +104,7 @@ class Adventurer(data: List<String>) {
         }
 
         val targetData = map[target[1]][target[0]]
-        if (targetData.first().toString() == "T") {
+        if (targetData.first() == 'T') {
             treasures += 1
             map[target[1]][target[0]] = if (targetData[2].toString().toInt() > 1) "T(${targetData[2].toString().toInt() - 1})" else "."
         }

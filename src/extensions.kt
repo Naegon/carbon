@@ -1,11 +1,11 @@
 import Utils.TEXTCOLOR.*
 
 fun String.color(): String {
-    return when(this.first().toString()) {
-        "." -> GREEN
-        "M" -> BLUE
-        "T" -> YELLOW
-        "A" -> RED
+    return when(this.first()) {
+        '.' -> GREEN
+        'M' -> BLUE
+        'T' -> YELLOW
+        'A' -> RED
         else -> RESET
     }.value + this + RESET.value
 }

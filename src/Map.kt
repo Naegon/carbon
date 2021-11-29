@@ -49,7 +49,7 @@ class Map (data: String) {
             }
             this.append("\n")
             adventurers.forEach {
-                this.append(it.toString() + "\n\n")
+                this.append("$it\n\n")
             }
         }
     }
