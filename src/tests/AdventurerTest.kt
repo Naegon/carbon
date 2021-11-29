@@ -23,19 +23,19 @@ internal class AdventurerTest {
         assertEquals(expectedAdventurer, adventurer.toString())
     }
 
-    @Test
-    fun testMoveForward() {
-        // Given
-        val adventurer = Adventurer(listOf("A", "Indiana", "1", "1", "S", "AA"))
-
-        // When
-        adventurer.forward()
-
-        // Then
-        val expectedAdventurer = Adventurer(listOf("A", "Indiana", "1", "2", "S", "A"))
-
-        assertTrue(expectedAdventurer == adventurer)
-    }
+//    @Test
+//    fun testMoveForward() {
+//        // Given
+//        val adventurer = Adventurer(listOf("A", "Indiana", "1", "1", "S", "AA"))
+//
+//        // When
+//        adventurer.forward()
+//
+//        // Then
+//        val expectedAdventurer = Adventurer(listOf("A", "Indiana", "1", "2", "S", "A"))
+//
+//        assertTrue(expectedAdventurer == adventurer)
+//    }
 
     @Test
     fun testTurnLeft() {

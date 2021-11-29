@@ -1,3 +1,4 @@
+import Adventurer.Movement.*
 import Adventurer.Orientation.*
 
 class Adventurer(data: List<String>) {
@@ -6,7 +7,7 @@ class Adventurer(data: List<String>) {
     var posY: Int
     private var orientation: Orientation?
     private val movement: ArrayList<Movement?> = ArrayList()
-    private val treasures: Int = 0
+    private var treasures: Int = 0
 
     init {
         // {A as "Aventurier"} - {Adventurer name} - {position in X} - {position in Y} - {Orientation} - {Movements}
@@ -26,9 +27,9 @@ class Adventurer(data: List<String>) {
 
         data[5].forEach {
             movement.add(when(it.toString()) {
-                "A" -> Movement.Avancer
-                "G" -> Movement.TournerGauche
-                "D" -> Movement.TournerDroite
+                "A" -> Avancer
+                "G" -> TournerGauche
+                "D" -> TournerDroite
                 else -> null // TODO: Error - Unsuported identifier
             })
         }
@@ -50,6 +51,14 @@ class Adventurer(data: List<String>) {
                 "  - Number of treasure(s): $treasures"
     }
 
+    override fun equals(other: Any?): Boolean =
+        (other is Adventurer)
+                && posX == other.posX
+                && posY == other.posY
+                && orientation == other.orientation
+                && movement == other.movement
+                && treasures == other.treasures
+
     fun getDisplayedName(): String {
         return "A(${
             if (name.length <= 5) name
@@ -58,18 +67,34 @@ class Adventurer(data: List<String>) {
     }
 
     fun getNextMove(): Movement? {
-        return movement[0]
+        return if (movement.isNotEmpty()) movement[0] else null
     }
 
-    override fun equals(other: Any?): Boolean =
-        (other is Adventurer)
-            && posX == other.posX
-            && posY == other.posY
-            && orientation == other.orientation
-            && movement == other.movement
-            && treasures == other.treasures
+    fun applyNextMove(map: Array<Array<String>>) {
+        when(getNextMove()) {
+            Avancer -> forward(map)
+            TournerGauche -> left()
+            TournerDroite -> right()
+            else -> { } // TODO: Error
+        }
+        movement.removeFirst()
+    }
 
-    fun forward() {
+    fun forward(map: Array<Array<String>>) {
+        val target: IntArray = intArrayOf(posX, posY)
+        when(orientation) {
+            Est -> target[0] += 1
+            Ouest -> target[0] -= 1
+            Nord -> target[1] -= 1
+            Sud -> target[1] += 1
+            null -> { } // TODO: Error
+        }
+
+        if (map.size <= target[1] || map[0].size <= target[0] || map[target[1]][target[0]] == "M") { // TODO: blocked by another adventurer
+            return
+        }
+
+
         when(orientation) {
             Est -> posX += 1
             Ouest -> posX -= 1
@@ -77,7 +102,12 @@ class Adventurer(data: List<String>) {
             Sud -> posY += 1
             null -> { } // TODO: Error
         }
-        movement.removeFirst()
+
+        val targetData = map[target[1]][target[0]]
+        if (targetData.first().toString() == "T") {
+            treasures += 1
+            map[target[1]][target[0]] = if (targetData[2].toString().toInt() > 1) "T(${targetData[2].toString().toInt() - 1})" else "."
+        }
     }
 
     fun left() {
@@ -88,7 +118,6 @@ class Adventurer(data: List<String>) {
             Sud -> Est
             null -> null // TODO: Error
         }
-        movement.removeFirst()
     }
 
     fun right() {
@@ -99,7 +128,6 @@ class Adventurer(data: List<String>) {
             Sud -> Ouest
             null -> null // TODO: Error
         }
-        movement.removeFirst()
     }
 
 }
